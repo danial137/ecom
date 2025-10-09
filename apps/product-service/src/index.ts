@@ -7,10 +7,14 @@ app.use(cors({
     credentials: true,
 }))
 
-app.get("/", (req:Request, res:Response) => {
-  res.json("product endpoint work!")
+app.get("/health", (req:Request, res:Response) => {
+  return res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timeStamp: Date.now(),
+  });
 })
 
-app.listen(800, () => {
-    console.log("product services is running on port 800");
+app.listen(8000, () => {
+    console.log("product services is running on port 8000");
 })

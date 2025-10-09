@@ -1,0 +1,8 @@
+{
+  "PRODUCT-SERVICE-URL": {
+    "value": "http://localhost:8000",
+    "type": "string",
+    "id": 0,
+    "isSecret": false
+  }
+}

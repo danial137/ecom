@@ -1,10 +1,15 @@
 import { serve } from "@hono/node-server";
+import { timeStamp } from "console";
 import { Hono } from "hono";
 
 const app = new Hono();
 
-app.get("/", (c) => {
-  return c.text("payment endpoint is works");
+app.get("/health", (c) => {
+  return c.json({
+    status: "ok",
+    uptime: process.uptime(),
+    timeStamp: Date.now(),
+  });
 });
 
 const start = async () => {
