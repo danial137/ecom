@@ -249,7 +249,7 @@ importers:
   apps/order-service:
     dependencies:
       '@clerk/fastify':
-        specifier: ^2.4.30
+        specifier: ^2.4.37
         version: 2.4.37(fastify@5.6.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       date-fns:
         specifier: ^4.1.0
@@ -302,7 +302,7 @@ importers:
   apps/product-service:
     dependencies:
       '@clerk/express':
-        specifier: ^1.7.30
+        specifier: ^1.7.37
         version: 1.7.37(express@5.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       cors:
         specifier: ^2.8.5
