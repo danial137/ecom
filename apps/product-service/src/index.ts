@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { clerkMiddleware, getAuth } from "@clerk/express";
 import { shouldBeUser } from "./middleware/authMiddleware.js";
+import productRouter from "./routes/product.route.js";
+import categoryRouter from "./routes/category.route.js";
 const app = express();
 
 app.use(
@@ -26,6 +28,9 @@ app.get("/test",shouldBeUser, (req, res) => {
   res.json({message: "product service authenticationed",userId:req.userId
   });
 });
+
+app.use("/products", productRouter)
+app.use('/categories',categoryRouter)
 
 app.listen(8000, () => {
   console.log("product services is running on port 8000");
