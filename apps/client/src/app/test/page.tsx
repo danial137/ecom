@@ -2,7 +2,9 @@ import { auth } from "@clerk/nextjs/server";
 
 const TestPage = async () => {
     const { getToken } = await auth();
-    const token = await getToken();
+  const token = await getToken();
+  
+  
 
     console.log(token)
 

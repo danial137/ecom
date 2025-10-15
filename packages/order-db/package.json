@@ -6,7 +6,10 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^24.7.2"
   },
-  ".": "./src/index.ts",
+  "exports":{
+ ".": "./src/index.ts"
+  },
+ 
   "dependencies": {
     "mongoose": "^8.19.1"
   }
