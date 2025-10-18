@@ -1,6 +1,6 @@
 "use client";
 
-import PaymentForm from "@/components/PaymentForm";
+
 import ShippingForm from "@/components/ShippingForm";
 import useCartStore from "@/stores/cartStore";
 import { CartItemsType, ShippingFormInputs } from "@repo/types";
@@ -167,7 +167,7 @@ const CartPage = () => {
           ) : activeStep === 2 ? (
             <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
-            <PaymentForm />
+         "to do add stripe form"
           ) : (
             <p className="text-sm text-gray-500">
               Please fill in the shipping form to continue.

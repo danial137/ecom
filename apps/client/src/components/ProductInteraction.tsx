@@ -1,7 +1,7 @@
 "use client";
 
 import useCartStore from "@/stores/cartStore";
-import { ProductType } from "@/types";
+import { ProductType } from "@repo/types";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -54,7 +54,7 @@ const ProductInteraction = ({
       <div className="flex flex-col gap-2 text-xs">
         <span className="text-gray-500">Size</span>
         <div className="flex items-center gap-2">
-          {product.sizes.map((size) => (
+          {product.size.map((size) => (
             <div
               className={`cursor-pointer border-1 p-[2px] ${
                 selectedSize === size ? "border-gray-600" : "border-gray-300"
