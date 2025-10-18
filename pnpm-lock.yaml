@@ -187,6 +187,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -439,16 +442,23 @@ importers:
         version: 6.17.1(typescript@5.9.2)
 
   packages/types:
+    dependencies:
+      '@repo/order-db':
+        specifier: workspace:*
+        version: link:../order-db
+      '@repo/product-db':
+        specifier: workspace:*
+        version: link:../product-db
+      zod:
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: ^24.7.2
+        specifier: ^24.3.1
         version: 24.7.2
-      typescript:
-        specifier: ^5.6.3
-        version: 5.9.2
 
   packages/typescript-config: {}
 
@@ -4913,11 +4923,11 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
 
   '@types/cors@2.8.19':
     dependencies:
@@ -4951,7 +4961,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.1.0':
     dependencies:
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.0
@@ -4995,16 +5005,16 @@ snapshots:
   '@types/send@0.17.5':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
 
   '@types/send@1.2.0':
     dependencies:
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
 
   '@types/serve-static@1.15.9':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 20.19.19
+      '@types/node': 24.7.2
       '@types/send': 0.17.5
 
   '@types/webidl-conversions@7.0.3': {}
