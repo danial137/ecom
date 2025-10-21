@@ -26,6 +26,8 @@ sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
     })
   );
 
+
+
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
