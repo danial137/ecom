@@ -9,23 +9,22 @@ const sessionRoute = new Hono();
 sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
   const { cart }: { cart: CartItemsType } = await c.req.json();
   const userId = c.get("userId");
-
-  const lineItems = await Promise.all(
-    cart.map(async (item) => {
-      const unitAmount = await getStripeProductPrice(item.id);
-      return {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: item.name,
-          },
-          unit_amount: unitAmount as number,
+const lineItems = await Promise.all(
+  cart.map(async (item) => {
+    // const unitAmount = await getStripeProductPrice(item.id);
+    const unitAmount = 1000; // تستی - یعنی هر محصول $10.00
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
         },
-        quantity: item.quantity,
-      };
-    })
-  );
-
+        unit_amount: unitAmount,
+      },
+      quantity: item.quantity,
+    };
+  })
+);
 
 
   try {
@@ -56,7 +55,7 @@ sessionRoute.get("/:session_id", async (c) => {
     }
   );
 
-  // console.log(session);
+  console.log(session);
 
   return c.json({
     status: session.status,
