@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import Stripe from "stripe";
 import stripe from "../utils/stripe";
+import { producer } from "../utils/kafka";
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
 const webhookRoute = new Hono();
 
@@ -13,28 +14,39 @@ webhookRoute.post("/stripe", async (c) => {
   try {
     event = stripe.webhooks.constructEvent(body, sig!, webhookSecret);
   } catch (error) {
-      console.log("webhook verfication failed");
-      return c.json({error:"webhook verfication failed!"},400)
-    }
-    
-    switch (event.type) {
-        case "checkout.session.completed":
+    console.log("webhook verfication failed");
+    return c.json({ error: "webhook verfication failed!" }, 400);
+  }
 
-            const session = event.data.object as Stripe.Checkout.Session
+  switch (event.type) {
+    case "checkout.session.completed":
+      const session = event.data.object as Stripe.Checkout.Session;
 
-            const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+      const lineItems = await stripe.checkout.sessions.listLineItems(
+        session.id
+      );
 
-            // TODO : CREATE ORDER
+      producer.send("payment.successful", {
+        value: {
+          userId: session.client_reference_id,
+          email: session.customer_details?.email,
+          amount: session.amount_total,
+          status: session.payment_status === "paid" ? "success" : "failed",
+          product: lineItems.data.map((item) => ({
+            name: item.description,
+            quantity: item.quantity,
+            price: item.price?.unit_amount,
+          })),
+        },
+      });
 
-            console.log("webhook recevied", session)
-            
-            break;
-    
-        default:
-            break;
-    }
+      break;
 
-    return c.json({ received: true });
+    default:
+      break;
+  }
+
+  return c.json({ received: true });
 });
 
-export default webhookRoute
+export default webhookRoute;
